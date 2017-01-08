@@ -8,8 +8,14 @@ a:hover {
   color: red;
 }
 
+hr {
+ /* height: 0.5px;
+  background-color: grey;*/
+  /*border: none;*/
+}
+
 .mainMenuHeader {
-  background-color: lightblue;
+  /*background-color: lightblue;*/
 }
 
 .mainTitle {
@@ -24,8 +30,10 @@ a:hover {
 }
 
 .linksPestana {
-  background-color: pink;
+  /*background-color: pink;*/
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 11px;
   font-size: 20px;
 }
+
+

@@ -11,8 +11,8 @@ export default class App extends React.Component {
         <header className="mainMenuHeader">
           <h1 className="mainTitle">Recibos BYP</h1>
           <div className="linksMenu">
-            <Link to="/" className="linksPestana">Home</Link>
-            <Link to="/recibo" className="linksPestana">Recibos</Link>
+            <Link to="/" className="linksPestana">Home |</Link>
+            <Link to="/recibo" className="linksPestana">Recibos |</Link>
             <Link to="/resumen" className="linksPestana">Resumen</Link>
           </div>
         </header><hr></hr>
