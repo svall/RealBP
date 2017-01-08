@@ -1,0 +1,31 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: red;
+}
+
+.mainMenuHeader {
+  background-color: lightblue;
+}
+
+.mainTitle {
+  color: darkred;
+  margin-bottom: 10px;
+}
+
+.linksMenu {
+  /*background-color: lightgreen;*/
+  /*height: 35px;*/
+  margin-bottom: -2px;
+}
+
+.linksPestana {
+  background-color: pink;
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 20px;
+}
