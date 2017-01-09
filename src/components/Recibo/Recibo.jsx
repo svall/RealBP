@@ -9,7 +9,8 @@ export default class App extends React.Component {
       <container>
         <h1 className="titleComp">Recibos</h1>
         <div className="formContainer">
-          <form action="submit">
+          <form onsubmit="event.preventDefault(); return validateMyForm();">
+          {/*<form onsubmit="return false;">*/}
             <div className="contOne">
               <div className="labelDivs">Edificio:
               <select className="aptInfo">
@@ -21,6 +22,7 @@ export default class App extends React.Component {
                 <option value="Edificio Abedules">Edificio Abedules</option>
               </select>
               <input className="aptInfo" id="aptDiv" type="text" placeholder="Num. Apto" />
+              <input className="aptInfo" id="recDiv" type="text" placeholder="Num. Recibo" />
               </div>
             </div>
             <div className="contTwo">
@@ -42,7 +44,7 @@ export default class App extends React.Component {
               </div><br></br>
               <div className="labelDivs">Retencion en la Fuente:
                 <input className="inputBox" type="text" placeholder="text" />
-              </div><br></br>
+              </div><br></br><hr></hr><br></br>
               <div className="labelDivs">Parkings Adicionales:
                 <input className="inputBox" type="text" placeholder="text" />
               </div><br></br>
@@ -57,7 +59,7 @@ export default class App extends React.Component {
               </div><br></br>
               <div className="labelDivs">Otros:
                 <input className="inputBox" type="text" placeholder="text" />
-              </div><br></br>
+              </div><br></br><hr></hr><br></br>
               <div className="labelDivs">Observaciones:
                 <input className="inputBox" id="observaciones" type="text" placeholder="text" />
               </div><br></br>
@@ -89,7 +91,7 @@ export default class App extends React.Component {
               </div><br></br>
               <div className="labelDivs"><span style={{"fontWeight":"bold"}}>DIFERENCIA ENTRE TOTALES:</span>
                 <input className="inputBox" type="text" placeholder="text" />
-              </div><br></br><br></br>
+              </div><br></br><hr></hr><br></br>
               <div className="labelDivs">Contrato Nuevo(**):
                 <input className="inputBox" type="text" placeholder="text" />
               </div><br></br>
