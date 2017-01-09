@@ -7,7 +7,7 @@ export default class App extends React.Component {
   render() {
     return(
       <container>
-        <h1>Recibos</h1>
+        <h1 className="titleComp">Recibos</h1>
         <div className="formContainer">
           <form action="submit">
             <div className="contOne">

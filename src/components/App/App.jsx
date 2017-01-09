@@ -9,7 +9,7 @@ export default class App extends React.Component {
     return(
       <container>
         <header className="mainMenuHeader">
-          <h1 className="mainTitle">Recibos BYP</h1>
+          <h1 className="mainTitle">Plataforma BYP</h1>
           <div className="linksMenu">
             <Link to="/" className="linksPestana">Home |</Link>
             <Link to="/recibo" className="linksPestana">Recibos |</Link>
