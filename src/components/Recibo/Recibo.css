@@ -1,0 +1,73 @@
+.formContainer {
+  border: 1px solid black;
+  width: 1000px;
+  margin: auto;
+}
+
+.formHeader {
+  text-align: center;
+  text-decoration: underline;
+  margin-bottom: 40px;
+}
+
+.contFour {
+  display: block;
+  /*background-color: pink;*/
+  text-align: right;
+}
+
+.contOne {
+  /*width: 300px;*/
+  /*border: 1px solid blue;*/
+  padding-top: 20px;
+  padding-left: 10px;
+  /*display: inline-block;*/
+}
+
+.aptInfo {
+  margin-right: 10px;
+  font-size: 15px;
+  margin-left: 8px;
+}
+
+#aptDiv {
+  width: 100px;
+}
+
+.contTwo {
+  width: 46.5%;
+  border-right: 1px solid black;
+  display: inline-block;
+  margin: 5px 6px;
+  padding: 10px;
+}
+
+.contThree {
+  width: 46.5%;
+  /*border: 1px solid green;*/
+  display: inline-block;
+  vertical-align: top;
+  margin: 5px 6px;
+  padding: 10px;
+}
+
+.inputBox {
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+.receiptBttn {
+  font-size: 25px;
+  position: relative;
+  right: 35px;
+  bottom: 28px;
+}
+
+.labelDivs {
+  /*background-color: lightgreen;*/
+  margin: -5px auto;
+}
+
+#observaciones {
+  width: 300px;
+}
