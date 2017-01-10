@@ -72,6 +72,10 @@
   bottom: 28px;
 }
 
+.totalBttn {
+  font-size: 25px;
+}
+
 .labelDivs {
   /*background-color: lightgreen;*/
   margin: -5px auto;
@@ -79,4 +83,12 @@
 
 #observaciones {
   width: 300px;
+}
+
+.totalsForm {
+  /*background-color: pink;*/
+  display: inline-block;
+  margin-left: 5px;
+  margin-top: 1px;
+  margin-bottom: 1px;
 }
