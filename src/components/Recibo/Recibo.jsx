@@ -6,14 +6,14 @@ export default class Recibo extends React.Component {
   constructor() {
     super();
     this.state = {
-      arriendo: '',
-      admon: '',
-      rfte: '',
-      parking: '',
-      externo: '',
-      amoblado: '',
-      comision: '',
-      otroarr: '',
+      arriendo: 0,
+      admon: 0,
+      rfte: 0,
+      parking: 0,
+      externo: 0,
+      amoblado: 0,
+      comision: 0,
+      otroarr: 0,
 
       efect: '',
       consigna: '',
@@ -29,6 +29,7 @@ export default class Recibo extends React.Component {
       comisamob: 0,
       comissegur: 0,
     };
+    // this.handleFocus = this.handleFocus.bind(this);
     this.handleBlurRecibo = this.handleBlurRecibo.bind(this);
     this.handleBlurPago = this.handleBlurPago.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,51 +39,65 @@ export default class Recibo extends React.Component {
 
 // ------- RECIBO handlers:
   handleChangeArr(event) {
-    this.setState({
-      arriendo: parseInt(event.target.value),
-    });
-  }
+    if (event.target.value != 0) {
+      this.setState({
+        arriendo: parseInt(event.target.value),
+      });
+      console.log(this.state.arriendo);
+    } else {
+      this.setState({
+        arriendo: 0,
+      });
+    }
+  } // copy to all handle changes
 
   handleChangeAdmon(event) {
     this.setState({
-      admon: parseInt(event.target.value),
+      admon: parseInt(this.state.admon) + parseInt(event.target.value),
     });
+    console.log("admon: ", (this.state.admon));
   }
 
   handleChangeParking(event) {
     this.setState({
-      parking: parseInt(event.target.value),
+      parking: parseInt(this.state.parking) + parseInt(event.target.value),
     });
+    console.log("parking: ", (this.state.parking));
   }
 
   handleChangeRfte(event) {
     this.setState({
       rfte: parseInt(event.target.value),
     });
+    console.log("rfte: ", (this.state.rfte));
   }
 
   handleChangeExterno(event) {
     this.setState({
       externo: parseInt(event.target.value),
     });
+    console.log("externo: ", (this.state.externo));
   }
 
   handleChangeAmoblado(event) {
     this.setState({
-      amoblado: parseInt(event.target.value),
+      amoblado: this.state.amoblado + parseInt(event.target.value),
     });
+    console.log("amoblado: ", (this.state.amoblado));
   }
 
   handleChangeComision(event) {
     this.setState({
-      comision: parseInt(event.target.value),
+      comision: this.state.comision + parseInt(event.target.value),
     });
+    console.log("comision: ", + (this.state.comision));
   }
 
   handleChangeOtroarr(event) {
     this.setState({
-      otroarr: parseInt(event.target.value),
+      otroarr: this.state.otroarr + parseInt(event.target.value),
     });
+    console.log("otroarr: ", (this.state.otroarr));
   }
 
 // ------- PAGO handlers:
@@ -119,7 +134,7 @@ export default class Recibo extends React.Component {
 // ------- BLUR/SUBMIT handlers:
   handleBlurRecibo(event) {
     this.setState({
-      totRecibo: parseInt(this.state.arriendo + this.state.admon + this.state.rfte + this.state.parking + this.state.externo + this.state.amoblado + this.state.comision + this.state.otroarr),
+      totRecibo: parseInt((this.state.arriendo + this.state.admon + this.state.rfte + this.state.parking + this.state.externo + this.state.amoblado + this.state.comision + this.state.otroarr)),
     });
   }
 
@@ -214,10 +229,10 @@ export default class Recibo extends React.Component {
                 <input className="inputBox" type="text" placeholder="text" />
               </div><br />
               <div className="labelDivs">Valor Arriendo:
-                <input className="inputBox" onChange={this.handleChangeArr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.arriendo} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeArr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.arriendo} type="number" placeholder="num" />
               </div><br />
               <div className="labelDivs">Valor Administracion:
-                <input className="inputBox" onChange={this.handleChangeAdmon.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.admon} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeAdmon.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.admon} type="number" placeholder="num" />
               </div><br />
               <div className="labelDivs">RFTE (anotar 1 si se hizo retencion):
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
