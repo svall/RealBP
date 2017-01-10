@@ -6,7 +6,7 @@ export default class Recibo extends React.Component {
   constructor() {
     super();
     this.state = {
-      arriend: '',
+      arriendo: '',
       admon: '',
       rfte: '',
       parking: '',
@@ -14,16 +14,29 @@ export default class Recibo extends React.Component {
       amoblado: '',
       comision: '',
       otroarr: '',
-      totRecibo: 0
+
+      efect: '',
+      consigna: '',
+      cheque: '',
+      transfer: '',
+      otropago: '',
+
+      valormes: '',
+
+      totRecibo: 0,
+      totPago: 0,
+      totDifer: 0
     };
-    this.handleBlur = this.handleBlur.bind(this);
+    this.handleBlurRecibo = this.handleBlurRecibo.bind(this);
+    this.handleBlurPago = this.handleBlurPago.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
+    this.handleDiffChange = this.handleDiffChange.bind(this);
   }
 
+// ------- RECIBO handlers:
   handleChangeArr(event) {
     this.setState({
-      arriend: parseInt(event.target.value)
+      arriendo: parseInt(event.target.value)
     })
   }
 
@@ -33,9 +46,90 @@ export default class Recibo extends React.Component {
     })
   }
 
-  handleBlur(event) {
+  handleChangeParking(event) {
     this.setState({
-      totRecibo: parseInt(this.state.arriend + this.state.admon + this.state.rfte + this.state.parking + this.state.externo + this.state.amoblado + this.state.comision + this.state.otroarr)
+      parking: parseInt(event.target.value)
+    })
+  }
+
+  handleChangeRfte(event) {
+    this.setState({
+      rfte: parseInt(event.target.value)
+    })
+  }
+
+  handleChangeExterno(event) {
+    this.setState({
+      externo: parseInt(event.target.value)
+    })
+  }
+
+  handleChangeAmoblado(event) {
+    this.setState({
+      amoblado: parseInt(event.target.value)
+    })
+  }
+
+  handleChangeComision(event) {
+    this.setState({
+      comision: parseInt(event.target.value)
+    })
+  }
+
+  handleChangeOtroarr(event) {
+    this.setState({
+      otroarr: parseInt(event.target.value)
+    })
+  }
+
+// ------- PAGO handlers:
+  handleChangeEfect(event) {
+    this.setState({
+      efect: parseInt(event.target.value)
+    })
+  }
+
+  handleChangeConsigna(event) {
+    this.setState({
+      consigna: parseInt(event.target.value)
+    })
+  }
+
+  handleChangeCheque(event) {
+    this.setState({
+      cheque: parseInt(event.target.value)
+    })
+  }
+
+  handleChangeTransfer(event) {
+    this.setState({
+      transfer: parseInt(event.target.value)
+    })
+  }
+
+  handleChangeOtropago(event) {
+    this.setState({
+      otropago: parseInt(event.target.value)
+    })
+  }
+
+// ------ Difference Calculation Handler:
+handleDiffChange(event) {
+  this.setState({
+    totDifer: parseInt(this.state.totPago) - parseInt(this.state.totRecibo)
+  })
+}
+
+// ------- BLUR/SUBMIT handlers:
+  handleBlurRecibo(event) {
+    this.setState({
+      totRecibo: parseInt(this.state.arriendo + this.state.admon + this.state.rfte + this.state.parking + this.state.externo + this.state.amoblado + this.state.comision + this.state.otroarr)
+    })
+  }
+
+  handleBlurPago(event) {
+    this.setState({
+      totPago: parseInt(this.state.efect + this.state.consigna + this.state.cheque + this.state.transfer + this.state.otropago)
     })
   }
 
@@ -73,10 +167,10 @@ export default class Recibo extends React.Component {
                 <input className="inputBox" type="text" placeholder="text" />
               </div><br></br>
               <div className="labelDivs">Valor Arriendo:
-                <input className="inputBox" onChange={this.handleChangeArr.bind(this)} onBlur={this.handleBlur} value={this.state.arriend} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeArr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.arriendo} type="text" placeholder="num" />
               </div><br></br>
               <div className="labelDivs">Valor Administracion:
-                <input className="inputBox" onChange={this.handleChangeAdmon.bind(this)} onBlur={this.handleBlur} value={this.state.admon} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeAdmon.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.admon} type="text" placeholder="num" />
               </div><br></br>
               <div className="labelDivs">RFTE (anotar 1 si se hizo retencion):
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
@@ -86,22 +180,22 @@ export default class Recibo extends React.Component {
                 </select>
               </div><br></br>
               <div className="labelDivs">Retencion en la Fuente:
-                <input className="inputBox" type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeRfte.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.rfte} type="text" placeholder="num" />
               </div><br></br><hr></hr><br></br>
               <div className="labelDivs">Parkings Adicionales:
-                <input className="inputBox" type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeParking.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.parking} type="text" placeholder="num" />
               </div><br></br>
               <div className="labelDivs">Arriendos Externos(*):
-                <input className="inputBox" type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeExterno.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.externo} type="text" placeholder="num" />
               </div><br></br>
               <div className="labelDivs">Amoblados:
-                <input className="inputBox" type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeAmoblado.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.amoblado} type="text" placeholder="num" />
               </div><br></br>
               <div className="labelDivs">Comision 20% BYP:
-                <input className="inputBox" type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeComision.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.comision} type="text" placeholder="num" />
               </div><br></br>
               <div className="labelDivs">Otros:
-                <input className="inputBox" type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeOtroarr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.otroarr} type="text" placeholder="num" />
               </div><br></br><hr></hr><br></br>
               <div className="labelDivs">Observaciones:
                 <input className="inputBox" id="observaciones" type="text" placeholder="text" />
@@ -116,28 +210,27 @@ export default class Recibo extends React.Component {
             <div className="contThree">
               <h3 className="formHeader">DATOS DE PAGO</h3>
               <div className="labelDivs">Efectivo:
-                <input className="inputBox" type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeEfect.bind(this)} onBlur={this.handleBlurPago} value={this.state.efect} type="text" placeholder="num" />
               </div><br></br>
               <div className="labelDivs">Consignacion:
-                <input className="inputBox" type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeConsigna.bind(this)} onBlur={this.handleBlurPago} value={this.state.consigna} type="text" placeholder="num" />
               </div><br></br>
               <div className="labelDivs">Valor en Cheque:
-                <input className="inputBox" type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeCheque.bind(this)} onBlur={this.handleBlurPago} value={this.state.cheque} type="text" placeholder="num" />
               </div><br></br>
               <div className="labelDivs">Transferencia:
-                <input className="inputBox" type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeTransfer.bind(this)} onBlur={this.handleBlurPago} value={this.state.transfer} type="text" placeholder="num" />
               </div><br></br>
               <div className="labelDivs">Otros:
-                <input className="inputBox" type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeOtropago.bind(this)} onBlur={this.handleBlurPago} value={this.state.otropago} type="text" placeholder="num" />
               </div><br></br>
               <div className="labelDivs"><span style={{"fontWeight":"bold"}}>TOTAL PAGADO:</span>
                 {/* <input className="inputBox" type="text" placeholder="text" />*/}
-                <h3 className="totalsForm" id="totCancel">0</h3>
+                <h3 className="totalsForm" id="totCancel">{this.state.totPago}</h3>
               </div><br></br><hr></hr><br></br>
-              <input type="button" value="VERIFICAR VALORES" className="totalBttn" /><br></br><br></br>
               <div className="labelDivs"><span style={{"fontWeight":"bold"}}>DIFERENCIA ENTRE TOTALES:</span>
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
-                <h3 className="totalsForm" id="totCancel">0</h3>
+                <h3 className="totalsForm" id="totCancel">{this.state.totPago - this.state.totRecibo}</h3>
               </div><br></br><hr></hr><br></br>
               <div className="labelDivs">Contrato Nuevo(**):
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
