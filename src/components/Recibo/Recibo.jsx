@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router';
 import './Recibo.css';
+
+const date = new Date();
 
 export default class Recibo extends React.Component {
   constructor() {
@@ -11,7 +12,8 @@ export default class Recibo extends React.Component {
       numrecibo: '',
 
       nombre: '',
-      periodo: '',
+      periodoini: '',
+      periodofin: '',
 
       arriendo: 0,
       admon: 0,
@@ -48,6 +50,10 @@ export default class Recibo extends React.Component {
     this.selectSeguroHandler = this.selectSeguroHandler.bind(this);
     this.selectNuevoHandler = this.selectNuevoHandler.bind(this);
     this.selectPropiedHandler = this.selectPropiedHandler.bind(this);
+  }
+
+  componentDidMount() {
+    console.log("today is ", date);
   }
 
 // ---- SELECT menu state checkers:
@@ -96,9 +102,15 @@ export default class Recibo extends React.Component {
     });
   }
 
-  handleChangePeriodo(event) {
+  handleChangePeriodoIni(event) {
     this.setState({
-      periodo: event.target.value,
+      periodoini: event.target.value,
+    });
+  }
+
+  handleChangePeriodoFin(event) {
+    this.setState({
+      periodofin: event.target.value,
     });
   }
 
@@ -423,8 +435,9 @@ export default class Recibo extends React.Component {
               <div className="labelDivs">Nombre:
                 <input className="inputBox" onChange={this.handleChangeNombre.bind(this)} type="text" placeholder="texto" />
               </div><br />
-              <div className="labelDivs">Periodo Cancelado:
-                <input className="inputBox" onChange={this.handleChangePeriodo.bind(this)} type="text" placeholder="texto" />
+              <div className="labelDivs">Periodo de:
+                <input className="periInfo" onChange={this.handleChangePeriodoIni.bind(this)} type="date" placeholder="texto" />
+                a: <input className="periInfo" onChange={this.handleChangePeriodoFin.bind(this)} type="date" placeholder="texto" />
               </div><br />
               <div className="labelDivs">Valor Arriendo:
                 <input className="inputBox" onChange={this.handleChangeArr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.arriendo} type="number" placeholder="numero" />
@@ -451,7 +464,7 @@ export default class Recibo extends React.Component {
                 <input className="inputBox" onChange={this.handleChangeOtroarr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.otroarr} type="number" placeholder="numero" />
               </div><br /><hr /><br />
               <div className="labelDivs">Observaciones:
-                <input className="inputBox" onChange={this.handleChangeObserv.bind(this)} id="observaciones" type="text" placeholder="text" />
+                <input className="inputBox" onChange={this.handleChangeObserv.bind(this)} id="observaciones" type="texto" placeholder="text" />
               </div><br />
               <div className="labelDivs"><span style={{"fontWeight":"bold"}}>TOTAL RECIBO:</span>
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}

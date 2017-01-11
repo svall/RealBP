@@ -65,6 +65,13 @@
   font-size: 15px;
 }
 
+.periInfo {
+  margin-right: 8px;
+  font-size: 15px;
+  margin-left: 8px;
+  width: 145px;
+}
+
 .receiptBttn {
   font-size: 25px;
   position: relative;
