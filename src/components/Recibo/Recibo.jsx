@@ -15,120 +15,241 @@ export default class Recibo extends React.Component {
       comision: 0,
       otroarr: 0,
 
-      efect: '',
-      consigna: '',
-      cheque: '',
-      transfer: '',
-      otropago: '',
+      efect: 0,
+      consigna: 0,
+      cheque: 0,
+      transfer: 0,
+      otropago: 0,
 
-      valormes: '',
+      valormes: 0,
+      selnuevo: 'no',
 
       totRecibo: 0,
       totPago: 0,
 
       comisamob: 0,
+      amobselect: 'no',
       comissegur: 0,
+      segselect: 'no',
     };
-    // this.handleFocus = this.handleFocus.bind(this);
     this.handleBlurRecibo = this.handleBlurRecibo.bind(this);
     this.handleBlurPago = this.handleBlurPago.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.selectAmobHandler = this.selectAmobHandler.bind(this);
     this.selectSeguroHandler = this.selectSeguroHandler.bind(this);
+    this.selectNuevoHandler = this.selectNuevoHandler.bind(this);
   }
 
-// ------- RECIBO handlers:
+// ---- SELECT menu state checkers:
+  checkAmoblado() {
+    if (this.state.amobselect === 'si') {
+      this.setState({
+        comisamob: parseInt(this.state.arriendo) * 0.1,
+      });
+    }
+    if (this.state.amobselect === 'no') {
+      this.setState({
+        comisamob: 0,
+      });
+    }
+  }
+
+  checkSeguro() {
+    if (this.state.segselect === 'si') {
+      this.setState({
+        comissegur: parseInt(this.state.arriendo) * 0.1,
+      });
+    }
+    if (this.state.segselect === 'no') {
+      this.setState({
+        comissegur: parseInt(this.state.arriendo) * 0.08,
+      });
+    }
+  }
+
+// ------- RECIBO onChange handlers:
   handleChangeArr(event) {
-    if (event.target.value != 0) {
+    if (event.target.value > 0) {
       this.setState({
         arriendo: parseInt(event.target.value),
       });
-      console.log(this.state.arriendo);
+      this.checkAmoblado();
+      this.checkSeguro();
     } else {
       this.setState({
         arriendo: 0,
       });
+      this.checkAmoblado();
+      this.checkSeguro();
     }
-  } // copy to all handle changes
+  }
 
   handleChangeAdmon(event) {
-    this.setState({
-      admon: parseInt(this.state.admon) + parseInt(event.target.value),
-    });
-    console.log("admon: ", (this.state.admon));
+    if (event.target.value > 0) {
+      this.setState({
+        admon: parseInt(event.target.value),
+      });
+    // console.log("admon: ", (this.state.admon));
+    } else {
+      this.setState({
+        admon: 0,
+      });
+    }
   }
 
   handleChangeParking(event) {
-    this.setState({
-      parking: parseInt(this.state.parking) + parseInt(event.target.value),
-    });
-    console.log("parking: ", (this.state.parking));
+    if (event.target.value > 0) {
+      this.setState({
+        parking: parseInt(event.target.value),
+      });
+    // console.log("parking: ", (this.state.parking));
+    } else {
+      this.setState({
+        parking: 0,
+      });
+    }
   }
 
   handleChangeRfte(event) {
-    this.setState({
-      rfte: parseInt(event.target.value),
-    });
-    console.log("rfte: ", (this.state.rfte));
+    if (event.target.value > 0) {
+      this.setState({
+        rfte: parseInt(event.target.value),
+      });
+    // console.log("rfte: ", (this.state.rfte));
+    } else {
+      this.setState({
+        rfte: 0,
+      });
+    }
   }
 
   handleChangeExterno(event) {
-    this.setState({
-      externo: parseInt(event.target.value),
-    });
-    console.log("externo: ", (this.state.externo));
+    if (event.target.value > 0) {
+      this.setState({
+        externo: parseInt(event.target.value),
+      });
+    // console.log("externo: ", (this.state.externo));
+    } else {
+      this.setState({
+        externo: 0,
+      });
+    }
   }
 
   handleChangeAmoblado(event) {
-    this.setState({
-      amoblado: this.state.amoblado + parseInt(event.target.value),
-    });
-    console.log("amoblado: ", (this.state.amoblado));
+    if (event.target.value > 0) {
+      this.setState({
+        amoblado: parseInt(event.target.value),
+      });
+    // console.log("amoblado: ", (this.state.amoblado));
+    } else {
+      this.setState({
+        amoblado: 0,
+      });
+    }
   }
 
   handleChangeComision(event) {
-    this.setState({
-      comision: this.state.comision + parseInt(event.target.value),
-    });
-    console.log("comision: ", + (this.state.comision));
+    if (event.target.value > 0) {
+      this.setState({
+        comision: parseInt(event.target.value),
+      });
+    // console.log("comision: ", (this.state.comision));
+    } else {
+      this.setState({
+        comision: 0,
+      });
+    }
   }
 
   handleChangeOtroarr(event) {
-    this.setState({
-      otroarr: this.state.otroarr + parseInt(event.target.value),
-    });
-    console.log("otroarr: ", (this.state.otroarr));
+    if (event.target.value > 0) {
+      this.setState({
+        otroarr: parseInt(event.target.value),
+      });
+    // console.log("otroarr: ", (this.state.otroarr));
+    } else {
+      this.setState({
+        otroarr: 0,
+      });
+    }
   }
 
 // ------- PAGO handlers:
   handleChangeEfect(event) {
-    this.setState({
-      efect: parseInt(event.target.value),
-    });
+    if (event.target.value > 0) {
+      this.setState({
+        efect: parseInt(event.target.value),
+      });
+    } else {
+      this.setState({
+        efect: 0,
+      });
+    }
   }
 
   handleChangeConsigna(event) {
-    this.setState({
-      consigna: parseInt(event.target.value),
-    });
+    if (event.target.value > 0) {
+      this.setState({
+        consigna: parseInt(event.target.value),
+      });
+    } else {
+      this.setState({
+        consigna: 0,
+      });
+    }
   }
 
   handleChangeCheque(event) {
-    this.setState({
-      cheque: parseInt(event.target.value),
-    });
+    if (event.target.value > 0) {
+      this.setState({
+        cheque: parseInt(event.target.value),
+      });
+    } else {
+      this.setState({
+        cheque: 0,
+      });
+    }
   }
 
   handleChangeTransfer(event) {
-    this.setState({
-      transfer: parseInt(event.target.value),
-    });
+    if (event.target.value > 0) {
+      this.setState({
+        transfer: parseInt(event.target.value),
+      });
+    } else {
+      this.setState({
+        transfer: 0,
+      });
+    }
   }
 
   handleChangeOtropago(event) {
-    this.setState({
-      otropago: parseInt(event.target.value),
-    });
+    if (event.target.value > 0) {
+      this.setState({
+        otropago: parseInt(event.target.value),
+      });
+    } else {
+      this.setState({
+        otropago: 0,
+      });
+    }
+  }
+
+  handleChangeNuevo(event) {
+    // console.log("selnuevo: ", this.state.selnuevo);
+    // console.log("target: ", parseInt(event.target.value));
+    if (this.state.selnuevo === 'no') {
+      this.setState({
+        valormes: 0,
+      });
+      event.target.value = 0;
+    }
+    else if (this.state.selnuevo === 'si' && parseInt(event.target.value) > 0) {
+      this.setState({
+        valormes: parseInt(event.target.value),
+      });
+    }
   }
 
 // ------- BLUR/SUBMIT handlers:
@@ -140,35 +261,37 @@ export default class Recibo extends React.Component {
 
   handleBlurPago(event) {
     this.setState({
-      totPago: parseInt(this.state.efect + this.state.consigna + this.state.cheque + this.state.transfer + this.state.otropago),
+      totPago: parseInt((this.state.efect + this.state.consigna + this.state.cheque + this.state.transfer + this.state.otropago)),
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     this.setState({
-      arriendo: '',
-      admon: '',
-      rfte: '',
-      parking: '',
-      externo: '',
-      amoblado: '',
-      comision: '',
-      otroarr: '',
+      arriendo: 0,
+      admon: 0,
+      rfte: 0,
+      parking: 0,
+      externo: 0,
+      amoblado: 0,
+      comision: 0,
+      otroarr: 0,
 
-      efect: '',
-      consigna: '',
-      cheque: '',
-      transfer: '',
-      otropago: '',
+      efect: 0,
+      consigna: 0,
+      cheque: 0,
+      transfer: 0,
+      otropago: 0,
 
-      valormes: '',
+      valormes: 0,
 
       totRecibo: 0,
       totPago: 0,
 
       comisamob: 0,
+      amobselect: 'no',
       comissegur: 0,
+      segselect: 'no',
     });
   }
 
@@ -177,11 +300,13 @@ export default class Recibo extends React.Component {
     if (event.target.value === 'si') {
       this.setState({
         comisamob: parseInt(this.state.arriendo) * 0.1,
+        amobselect: 'si',
       });
     }
-    if (event.target.value === 'no') {
+    else if (event.target.value === 'no') {
       this.setState({
         comisamob: 0,
+        amobselect: 'no',
       });
     }
   }
@@ -190,11 +315,27 @@ export default class Recibo extends React.Component {
     if (event.target.value === 'si') {
       this.setState({
         comissegur: parseInt(this.state.arriendo) * 0.1,
+        segselect: 'si',
+      });
+    }
+    else if (event.target.value === 'no') {
+      this.setState({
+        comissegur: parseInt(this.state.arriendo) * 0.08,
+        segselect: 'no',
+      });
+    }
+  }
+
+  selectNuevoHandler(event) {
+    if (event.target.value === 'si') {
+      this.setState({
+        selnuevo: 'si',
       });
     }
     if (event.target.value === 'no') {
       this.setState({
-        comissegur: parseInt(this.state.arriendo) * 0.08,
+        selnuevo: 'no',
+        valormes: 0,
       });
     }
   }
@@ -223,41 +364,34 @@ export default class Recibo extends React.Component {
             <div className="contTwo">
               <h3 className="formHeader">DATOS DEL RECIBO</h3>
               <div className="labelDivs">Nombre:
-                <input className="inputBox" type="text" placeholder="text" />
+                <input className="inputBox" type="text" placeholder="texto" />
               </div><br />
               <div className="labelDivs">Periodo Cancelado:
-                <input className="inputBox" type="text" placeholder="text" />
+                <input className="inputBox" type="text" placeholder="texto" />
               </div><br />
               <div className="labelDivs">Valor Arriendo:
-                <input className="inputBox" onChange={this.handleChangeArr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.arriendo} type="number" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeArr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.arriendo} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs">Valor Administracion:
-                <input className="inputBox" onChange={this.handleChangeAdmon.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.admon} type="number" placeholder="num" />
-              </div><br />
-              <div className="labelDivs">RFTE (anotar 1 si se hizo retencion):
-                {/*<input className="inputBox" type="text" placeholder="text" />*/}
-                <select className="aptInfo">
-                  <option value="no">NO</option>
-                  <option value="si">SI</option>
-                </select>
+                <input className="inputBox" onChange={this.handleChangeAdmon.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.admon} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs">Retencion en la Fuente:
-                <input className="inputBox" onChange={this.handleChangeRfte.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.rfte} type="text" placeholder="num" />
-              </div><br /><hr></hr><br />
+                <input className="inputBox" onChange={this.handleChangeRfte.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.rfte} type="number" placeholder="numero" />
+              </div><br /><hr /><br />
               <div className="labelDivs">Parkings Adicionales:
-                <input className="inputBox" onChange={this.handleChangeParking.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.parking} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeParking.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.parking} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs">Arriendos Externos(*):
-                <input className="inputBox" onChange={this.handleChangeExterno.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.externo} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeExterno.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.externo} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs">Amoblados:
-                <input className="inputBox" onChange={this.handleChangeAmoblado.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.amoblado} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeAmoblado.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.amoblado} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs">Comision 20% BYP:
-                <input className="inputBox" onChange={this.handleChangeComision.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.comision} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeComision.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.comision} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs">Otros:
-                <input className="inputBox" onChange={this.handleChangeOtroarr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.otroarr} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeOtroarr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.otroarr} type="number" placeholder="numero" />
               </div><br /><hr /><br />
               <div className="labelDivs">Observaciones:
                 <input className="inputBox" id="observaciones" type="text" placeholder="text" />
@@ -272,37 +406,37 @@ export default class Recibo extends React.Component {
             <div className="contThree">
               <h3 className="formHeader">DATOS DE PAGO</h3>
               <div className="labelDivs">Efectivo:
-                <input className="inputBox" onChange={this.handleChangeEfect.bind(this)} onBlur={this.handleBlurPago} value={this.state.efect} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeEfect.bind(this)} onBlur={this.handleBlurPago} value={this.state.efect} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs">Consignacion:
-                <input className="inputBox" onChange={this.handleChangeConsigna.bind(this)} onBlur={this.handleBlurPago} value={this.state.consigna} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeConsigna.bind(this)} onBlur={this.handleBlurPago} value={this.state.consigna} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs">Valor en Cheque:
-                <input className="inputBox" onChange={this.handleChangeCheque.bind(this)} onBlur={this.handleBlurPago} value={this.state.cheque} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeCheque.bind(this)} onBlur={this.handleBlurPago} value={this.state.cheque} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs">Transferencia:
-                <input className="inputBox" onChange={this.handleChangeTransfer.bind(this)} onBlur={this.handleBlurPago} value={this.state.transfer} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeTransfer.bind(this)} onBlur={this.handleBlurPago} value={this.state.transfer} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs">Otros:
-                <input className="inputBox" onChange={this.handleChangeOtropago.bind(this)} onBlur={this.handleBlurPago} value={this.state.otropago} type="text" placeholder="num" />
+                <input className="inputBox" onChange={this.handleChangeOtropago.bind(this)} onBlur={this.handleBlurPago} value={this.state.otropago} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs"><span style={{"fontWeight":"bold"}}>TOTAL PAGADO:</span>
                 {/* <input className="inputBox" type="text" placeholder="text" />*/}
                 <h3 className="totalsForm" id="totCancel">{this.state.totPago}</h3>
-              </div><br /><hr></hr><br />
+              </div><br /><hr /><br />
               <div className="labelDivs"><span style={{"fontWeight":"bold"}}>DIFERENCIA ENTRE TOTALES:</span>
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
                 <h3 className="totalsForm" id="totCancel">{this.state.totPago - this.state.totRecibo}</h3>
-              </div><br /><hr></hr><br />
-              <div className="labelDivs">Contrato Nuevo(**):
+              </div><br /><hr /><br />
+              <div className="labelDivs">Contrato Nuevo:
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
-                <select className="aptInfo">
+                <select className="aptInfo" onChange={this.selectNuevoHandler}>
                   <option value="no">NO</option>
                   <option value="si">SI</option>
                 </select>
               </div><br />
               <div className="labelDivs">Valor 1 Mes de Arriendo:
-                <input className="inputBox" type="text" placeholder="num" />
+                <input className="inputBox" onBlur={this.handleChangeNuevo.bind(this)} value={this.state.otropago} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs">Amoblado:
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
@@ -324,12 +458,6 @@ export default class Recibo extends React.Component {
             <div className="contFour">
               <input type="button" value="GUARDAR" className="receiptBttn" onClick={this.handleSubmit} />
             </div>
-            {/*<input type="hidden" placeholder="1conseguro" value=""/>
-            <input type="hidden" placeholder="1sinseguro" />
-            <input type="hidden" placeholder="diez" />
-            <input type="hidden" placeholder="ocho" />
-            <input type="hidden" placeholder="1ingresoamob" />
-            <input type="hidden" placeholder="diezamobl" />*/}
           </form>
         </div>
       </container>
