@@ -6,6 +6,13 @@ export default class Recibo extends React.Component {
   constructor() {
     super();
     this.state = {
+      propiedad: '',
+      numapt: '',
+      numrecibo: '',
+
+      nombre: '',
+      periodo: '',
+
       arriendo: 0,
       admon: 0,
       rfte: 0,
@@ -14,6 +21,8 @@ export default class Recibo extends React.Component {
       amoblado: 0,
       comision: 0,
       otroarr: 0,
+
+      observaciones: '',
 
       efect: 0,
       consigna: 0,
@@ -38,6 +47,7 @@ export default class Recibo extends React.Component {
     this.selectAmobHandler = this.selectAmobHandler.bind(this);
     this.selectSeguroHandler = this.selectSeguroHandler.bind(this);
     this.selectNuevoHandler = this.selectNuevoHandler.bind(this);
+    this.selectPropiedHandler = this.selectPropiedHandler.bind(this);
   }
 
 // ---- SELECT menu state checkers:
@@ -68,6 +78,30 @@ export default class Recibo extends React.Component {
   }
 
 // ------- RECIBO onChange handlers:
+  handleChangeApto(event) {
+    this.setState({
+      numapt: event.target.value,
+    });
+  }
+
+  handleChangeRecibo(event) {
+    this.setState({
+      numrecibo: event.target.value,
+    });
+  }
+
+  handleChangeNombre(event) {
+    this.setState({
+      nombre: event.target.value,
+    });
+  }
+
+  handleChangePeriodo(event) {
+    this.setState({
+      periodo: event.target.value,
+    });
+  }
+
   handleChangeArr(event) {
     if (event.target.value > 0) {
       this.setState({
@@ -175,6 +209,12 @@ export default class Recibo extends React.Component {
     }
   }
 
+  handleChangeObserv(event) {
+    this.setState({
+      observaciones: event.target.value,
+    });
+  }
+
 // ------- PAGO handlers:
   handleChangeEfect(event) {
     if (event.target.value > 0) {
@@ -245,7 +285,7 @@ export default class Recibo extends React.Component {
       });
       event.target.value = 0;
     }
-    else if (this.state.selnuevo === 'si' && parseInt(event.target.value) > 0) {
+    if (this.state.selnuevo === 'si' && parseInt(event.target.value) > 0) {
       this.setState({
         valormes: parseInt(event.target.value),
       });
@@ -268,6 +308,13 @@ export default class Recibo extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.setState({
+      propiedad: '',
+      numapt: '',
+      numrecibo: '',
+
+      nombre: '',
+      periodo: '',
+
       arriendo: 0,
       admon: 0,
       rfte: 0,
@@ -277,6 +324,8 @@ export default class Recibo extends React.Component {
       comision: 0,
       otroarr: 0,
 
+      observaciones: '',
+
       efect: 0,
       consigna: 0,
       cheque: 0,
@@ -284,6 +333,7 @@ export default class Recibo extends React.Component {
       otropago: 0,
 
       valormes: 0,
+      selnuevo: 'no',
 
       totRecibo: 0,
       totPago: 0,
@@ -296,6 +346,12 @@ export default class Recibo extends React.Component {
   }
 
 // ---- SELECT menu handlers:
+  selectPropiedHandler(event) {
+    this.setState({
+      propiedad: event.target.value,
+    });
+  }
+
   selectAmobHandler(event) {
     if (event.target.value === 'si') {
       this.setState({
@@ -330,6 +386,7 @@ export default class Recibo extends React.Component {
     if (event.target.value === 'si') {
       this.setState({
         selnuevo: 'si',
+        // valormes: this.state.valormes,
       });
     }
     if (event.target.value === 'no') {
@@ -349,25 +406,25 @@ export default class Recibo extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <div className="contOne">
               <div className="labelDivs">Propiedad:
-              <select className="aptInfo">
+              <select className="aptInfo" onChange={this.selectPropiedHandler}>
                 <option></option>
                 <option value="plazaLinares">Plaza Linares</option>
                 <option value="tresTorres">Tres Torres</option>
                 <option value="centroIntegralLasVegas">Centro Integral Las Vegas</option>
-                <option value="terminaldelSur">Terminal del Sur</option>
+                <option value="terminalDelSur">Terminal del Sur</option>
                 <option value="edificioAbedules">Edificio Abedules</option>
               </select>
-              <input className="aptInfo" id="aptDiv" type="text" placeholder="Num. Apto" />
-              <input className="aptInfo" id="recDiv" type="text" placeholder="Num. Recibo" />
+              <input className="aptInfo" onChange={this.handleChangeApto.bind(this)} value={this.state.numapt} id="aptDiv" type="text" placeholder="Num. Apto" />
+              <input className="aptInfo" onChange={this.handleChangeRecibo.bind(this)} value={this.state.numrecibo} id="recDiv" type="text" placeholder="Num. Recibo" />
               </div>
             </div>
             <div className="contTwo">
               <h3 className="formHeader">DATOS DEL RECIBO</h3>
               <div className="labelDivs">Nombre:
-                <input className="inputBox" type="text" placeholder="texto" />
+                <input className="inputBox" onChange={this.handleChangeNombre.bind(this)} type="text" placeholder="texto" />
               </div><br />
               <div className="labelDivs">Periodo Cancelado:
-                <input className="inputBox" type="text" placeholder="texto" />
+                <input className="inputBox" onChange={this.handleChangePeriodo.bind(this)} type="text" placeholder="texto" />
               </div><br />
               <div className="labelDivs">Valor Arriendo:
                 <input className="inputBox" onChange={this.handleChangeArr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.arriendo} type="number" placeholder="numero" />
@@ -394,7 +451,7 @@ export default class Recibo extends React.Component {
                 <input className="inputBox" onChange={this.handleChangeOtroarr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.otroarr} type="number" placeholder="numero" />
               </div><br /><hr /><br />
               <div className="labelDivs">Observaciones:
-                <input className="inputBox" id="observaciones" type="text" placeholder="text" />
+                <input className="inputBox" onChange={this.handleChangeObserv.bind(this)} id="observaciones" type="text" placeholder="text" />
               </div><br />
               <div className="labelDivs"><span style={{"fontWeight":"bold"}}>TOTAL RECIBO:</span>
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
@@ -436,7 +493,7 @@ export default class Recibo extends React.Component {
                 </select>
               </div><br />
               <div className="labelDivs">Valor 1 Mes de Arriendo:
-                <input className="inputBox" onBlur={this.handleChangeNuevo.bind(this)} value={this.state.otropago} type="number" placeholder="numero" />
+                <input className="inputBox" onChange={this.handleChangeNuevo.bind(this)} value={this.state.valormes} type="number" placeholder="numero" />
               </div><br />
               <div className="labelDivs">Amoblado:
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
