@@ -9,7 +9,7 @@ export default class Recibo extends React.Component {
     this.state = {
       propiedad: '',
       numapt: '',
-      numrecibo: '',
+      numrecibo: 0,
 
       nombre: '',
       periodoini: '',
@@ -35,8 +35,8 @@ export default class Recibo extends React.Component {
       valormes: 0,
       selnuevo: 'no',
 
-      totRecibo: 0,
-      totPago: 0,
+      totrecibo: 0,
+      totpago: 0,
 
       comisamob: 0,
       amobselect: 'no',
@@ -92,8 +92,9 @@ export default class Recibo extends React.Component {
 
   handleChangeRecibo(event) {
     this.setState({
-      numrecibo: event.target.value,
+      numrecibo: parseInt(event.target.value),
     });
+    console.log('recibo ', this.state.numrecibo)
   }
 
   handleChangeNombre(event) {
@@ -307,54 +308,74 @@ export default class Recibo extends React.Component {
 // ------- BLUR/SUBMIT handlers:
   handleBlurRecibo(event) {
     this.setState({
-      totRecibo: parseInt((this.state.arriendo + this.state.admon + this.state.rfte + this.state.parking + this.state.externo + this.state.amoblado + this.state.comision + this.state.otroarr)),
+      totrecibo: parseInt((this.state.arriendo + this.state.admon + this.state.rfte + this.state.parking + this.state.externo + this.state.amoblado + this.state.comision + this.state.otroarr)),
     });
   }
 
   handleBlurPago(event) {
     this.setState({
-      totPago: parseInt((this.state.efect + this.state.consigna + this.state.cheque + this.state.transfer + this.state.otropago)),
+      totpago: parseInt((this.state.efect + this.state.consigna + this.state.cheque + this.state.transfer + this.state.otropago)),
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({
-      propiedad: '',
-      numapt: '',
-      numrecibo: '',
 
-      nombre: '',
-      periodo: '',
+    fetch('/recibonuevo', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        propiedad: this.state.propiedad,
+        numapt: this.state.numapt,
+        numrecibo: this.state.numrecibo,
+      })
+    })
+    // .then(this.setState({
+    //   propiedad: '',
+    //   numapt: '',
+    //   numrecibo: '',
+    // }))
+    .catch(err => console.log(err));
 
-      arriendo: 0,
-      admon: 0,
-      rfte: 0,
-      parking: 0,
-      externo: 0,
-      amoblado: 0,
-      comision: 0,
-      otroarr: 0,
+    // check receipt num and propiedad
+    // this.setState({
+    //   propiedad: '',
+    //   numapt: '',
+    //   numrecibo: '',
 
-      observaciones: '',
+    //   nombre: '',
+    //   periodo: '',
 
-      efect: 0,
-      consigna: 0,
-      cheque: 0,
-      transfer: 0,
-      otropago: 0,
+    //   arriendo: 0,
+    //   admon: 0,
+    //   rfte: 0,
+    //   parking: 0,
+    //   externo: 0,
+    //   amoblado: 0,
+    //   comision: 0,
+    //   otroarr: 0,
 
-      valormes: 0,
-      selnuevo: 'no',
+    //   observaciones: '',
 
-      totRecibo: 0,
-      totPago: 0,
+    //   efect: 0,
+    //   consigna: 0,
+    //   cheque: 0,
+    //   transfer: 0,
+    //   otropago: 0,
 
-      comisamob: 0,
-      amobselect: 'no',
-      comissegur: 0,
-      segselect: 'no',
-    });
+    //   valormes: 0,
+    //   selnuevo: 'no',
+
+    //   totrecibo: 0,
+    //   totpago: 0,
+
+    //   comisamob: 0,
+    //   amobselect: 'no',
+    //   comissegur: 0,
+    //   segselect: 'no',
+    // });
   }
 
 // ---- SELECT menu handlers:
@@ -415,19 +436,19 @@ export default class Recibo extends React.Component {
         <h1 className="titleComp">Formato de Recibos</h1>
         <div className="formContainer">
           {/*<form onSubmit="event.preventDefault(); return validateMyForm();">*/}
-          <form onSubmit={this.handleSubmit}>
+          <form>
             <div className="contOne">
               <div className="labelDivs">Propiedad:
-              <select className="aptInfo" onChange={this.selectPropiedHandler}>
+              <select className="aptInfo" name="propiedad" onChange={this.selectPropiedHandler}>
                 <option></option>
-                <option value="plazaLinares">Plaza Linares</option>
-                <option value="tresTorres">Tres Torres</option>
-                <option value="centroIntegralLasVegas">Centro Integral Las Vegas</option>
-                <option value="terminalDelSur">Terminal del Sur</option>
-                <option value="edificioAbedules">Edificio Abedules</option>
+                <option value="plazaLinares" name="propiedad">Plaza Linares</option>
+                <option value="tresTorres" name="propiedad">Tres Torres</option>
+                <option value="centroIntegralLasVegas" name="propiedad">Centro Integral Las Vegas</option>
+                <option value="terminalDelSur" name="propiedad">Terminal del Sur</option>
+                <option value="edificioAbedules" name="propiedad">Edificio Abedules</option>
               </select>
-              <input className="aptInfo" onChange={this.handleChangeApto.bind(this)} value={this.state.numapt} id="aptDiv" type="text" placeholder="Num. Apto" />
-              <input className="aptInfo" onChange={this.handleChangeRecibo.bind(this)} value={this.state.numrecibo} id="recDiv" type="text" placeholder="Num. Recibo" />
+              <input className="aptInfo" name="numapt" onChange={this.handleChangeApto.bind(this)} value={this.state.numapt} id="aptDiv" type="text" placeholder="Num. Apto" />
+              <input className="aptInfo" name="numrecibo" onChange={this.handleChangeRecibo.bind(this)} value={this.state.numrecibo} id="recDiv" type="number" placeholder="Num. Recibo" />
               </div>
             </div>
             <div className="contTwo">
@@ -468,7 +489,7 @@ export default class Recibo extends React.Component {
               </div><br />
               <div className="labelDivs"><span style={{"fontWeight":"bold"}}>TOTAL RECIBO:</span>
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
-                <h3 className="totalsForm" id="totCancel">{this.state.totRecibo}</h3>
+                <h3 className="totalsForm" id="totCancel">{this.state.totrecibo}</h3>
               </div><br />
               <label>(*) Que no sean de Tres Torres o Plaza Linares
               </label><br />
@@ -492,11 +513,11 @@ export default class Recibo extends React.Component {
               </div><br />
               <div className="labelDivs"><span style={{"fontWeight":"bold"}}>TOTAL PAGADO:</span>
                 {/* <input className="inputBox" type="text" placeholder="text" />*/}
-                <h3 className="totalsForm" id="totCancel">{this.state.totPago}</h3>
+                <h3 className="totalsForm" id="totCancel">{this.state.totpago}</h3>
               </div><br /><hr /><br />
               <div className="labelDivs"><span style={{"fontWeight":"bold"}}>DIFERENCIA ENTRE TOTALES:</span>
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
-                <h3 className="totalsForm" id="totCancel">{this.state.totPago - this.state.totRecibo}</h3>
+                <h3 className="totalsForm" id="totCancel">{this.state.totpago - this.state.totrecibo}</h3>
               </div><br /><hr /><br />
               <div className="labelDivs">Contrato Nuevo:
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
