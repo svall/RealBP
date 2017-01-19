@@ -6,7 +6,7 @@ function addRecibo(req, res, next) {
     VALUES ($/propiedad/, $/numapt/, $/numrecibo/, $/nombre/, $/periodoini/, $/periodofin/, $/arriendo/, $/admon/, $/rfte/, $/parking/, $/externo/, $/amoblado/, $/comision/, $/otroarr/, $/observaciones/, $/efect/, $/consigna/, $/cheque/, $/transfer/, $/otropago/, $/valormes/, $/selnuevo/, $/totrecibo/, $/totpago/, $/comisamob/, $/amobselect/, $/comissegur/, $/segselect/)
     ;`, req.body)
   .then(() => {
-    console.log('model ', req.body);
+    // console.log('model ', req.body);
     next();
   })
 }
@@ -21,6 +21,20 @@ function addRecibo(req, res, next) {
 //   })
 // }
 
+function getAllRecibos(req, res, next) {
+  db.any(`
+    SELECT *
+    FROM recibos;
+  `)
+  .then((recibos) => {
+    res.recibos = recibos;
+    console.log('in model ', req.recibos);
+    next();
+  })
+  .catch(error => next(error));
+}
+
 module.exports = {
   addRecibo,
+  getAllRecibos,
 }
