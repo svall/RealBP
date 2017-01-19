@@ -330,51 +330,102 @@ export default class Recibo extends React.Component {
         propiedad: this.state.propiedad,
         numapt: this.state.numapt,
         numrecibo: this.state.numrecibo,
+        nombre: this.state.nombre,
+        periodoini: this.state.periodoini,
+        periodofin: this.state.periodofin,
+        arriendo: this.state.arriendo,
+        admon: this.state.admon,
+        rfte: this.state.rfte,
+        parking: this.state.parking,
+        externo: this.state.externo,
+        amoblado: this.state.amoblado,
+        comision: this.state.comision,
+        otroarr: this.state.otroarr,
+        observaciones: this.state.observaciones,
+        efect: this.state.efect,
+        consigna: this.state.consigna,
+        cheque: this.state.cheque,
+        transfer: this.state.transfer,
+        otropago: this.state.otropago,
+        valormes: this.state.valormes,
+        selnuevo: this.state.selnuevo,
+        totrecibo: this.state.totrecibo,
+        totpago: this.state.totpago,
+        comisamob: this.state.comisamob,
+        amobselect: this.state.amobselect,
+        comissegur: this.state.comissegur,
+        segselect: this.state.segselect,
       })
     })
     .then(this.setState({
       propiedad: '',
       numapt: '',
       numrecibo: '',
+      nombre: '',
+      periodoini: '',
+      periodofin: '',
+      arriendo: 0,
+      admon: 0,
+      rfte: 0,
+      parking: 0,
+      externo: 0,
+      amoblado: 0,
+      comision: 0,
+      otroarr: 0,
+      observaciones: '',
+      efect: 0,
+      consigna: 0,
+      cheque: 0,
+      transfer: 0,
+      otropago: 0,
+      valormes: 0,
+      selnuevo: 'no',
+      totrecibo: 0,
+      totpago: 0,
+      comisamob: 0,
+      amobselect: 'no',
+      comissegur: 0,
+      segselect: 'no',
     }))
     .catch(err => console.log(err));
 
     // check receipt num and propiedad
     // this.setState({
     //   propiedad: '',
-    //   numapt: '',
-    //   numrecibo: '',
+      // numapt: '',
+      // numrecibo: '',
 
-    //   nombre: '',
-    //   periodo: '',
+      // nombre: '',
+      // periodoini: '',
+      // periodofin: '',
 
-    //   arriendo: 0,
-    //   admon: 0,
-    //   rfte: 0,
-    //   parking: 0,
-    //   externo: 0,
-    //   amoblado: 0,
-    //   comision: 0,
-    //   otroarr: 0,
+      // arriendo: 0,
+      // admon: 0,
+      // rfte: 0,
+      // parking: 0,
+      // externo: 0,
+      // amoblado: 0,
+      // comision: 0,
+      // otroarr: 0,
 
-    //   observaciones: '',
+      // observaciones: '',
 
-    //   efect: 0,
-    //   consigna: 0,
-    //   cheque: 0,
-    //   transfer: 0,
-    //   otropago: 0,
+      // efect: 0,
+      // consigna: 0,
+      // cheque: 0,
+      // transfer: 0,
+      // otropago: 0,
 
-    //   valormes: 0,
-    //   selnuevo: 'no',
+      // valormes: 0,
+      // selnuevo: 'no',
 
-    //   totrecibo: 0,
-    //   totpago: 0,
+      // totrecibo: 0,
+      // totpago: 0,
 
-    //   comisamob: 0,
-    //   amobselect: 'no',
-    //   comissegur: 0,
-    //   segselect: 'no',
+      // comisamob: 0,
+      // amobselect: 'no',
+      // comissegur: 0,
+      // segselect: 'no',
     // });
   }
 
@@ -454,11 +505,11 @@ export default class Recibo extends React.Component {
             <div className="contTwo">
               <h3 className="formHeader">DATOS DEL RECIBO</h3>
               <div className="labelDivs">Nombre:
-                <input className="inputBox" onChange={this.handleChangeNombre.bind(this)} type="text" placeholder="texto" />
+                <input className="inputBox" onChange={this.handleChangeNombre.bind(this)} value={this.state.nombre} type="text" placeholder="texto" />
               </div><br />
               <div className="labelDivs">Periodo de:
-                <input className="periInfo" onChange={this.handleChangePeriodoIni.bind(this)} type="date" placeholder="texto" />
-                a: <input className="periInfo" onChange={this.handleChangePeriodoFin.bind(this)} type="date" placeholder="texto" />
+                <input className="periInfo" onChange={this.handleChangePeriodoIni.bind(this)} value={this.state.periodoini} type="date" placeholder="texto" />
+                a: <input className="periInfo" onChange={this.handleChangePeriodoFin.bind(this)} value={this.state.periodofin} type="date" placeholder="texto" />
               </div><br />
               <div className="labelDivs">Valor Arriendo:
                 <input className="inputBox" onChange={this.handleChangeArr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.arriendo} type="number" placeholder="numero" />
@@ -485,7 +536,7 @@ export default class Recibo extends React.Component {
                 <input className="inputBox" onChange={this.handleChangeOtroarr.bind(this)} onBlur={this.handleBlurRecibo} value={this.state.otroarr} type="number" placeholder="numero" />
               </div><br /><hr /><br />
               <div className="labelDivs">Observaciones:
-                <input className="inputBox" onChange={this.handleChangeObserv.bind(this)} id="observaciones" type="texto" placeholder="text" />
+                <input className="inputBox" onChange={this.handleChangeObserv.bind(this)} id="observaciones" value={this.state.observaciones} type="texto" placeholder="text" />
               </div><br />
               <div className="labelDivs"><span style={{"fontWeight":"bold"}}>TOTAL RECIBO:</span>
                 {/*<input className="inputBox" type="text" placeholder="text" />*/}
