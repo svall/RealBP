@@ -9,7 +9,7 @@ export default class Recibo extends React.Component {
     this.state = {
       propiedad: '',
       numapt: '',
-      numrecibo: 0,
+      numrecibo: '',
 
       nombre: '',
       periodoini: '',
@@ -332,11 +332,11 @@ export default class Recibo extends React.Component {
         numrecibo: this.state.numrecibo,
       })
     })
-    // .then(this.setState({
-    //   propiedad: '',
-    //   numapt: '',
-    //   numrecibo: '',
-    // }))
+    .then(this.setState({
+      propiedad: '',
+      numapt: '',
+      numrecibo: '',
+    }))
     .catch(err => console.log(err));
 
     // check receipt num and propiedad
