@@ -60,7 +60,7 @@ export default class Recibo extends React.Component {
   checkAmoblado() {
     if (this.state.amobselect === 'si') {
       this.setState({
-        comisamob: parseInt(this.state.arriendo) * 0.1,
+        comisamob: (parseInt(this.state.arriendo) * 0.1).toFixed(2),
       });
     }
     if (this.state.amobselect === 'no') {
@@ -73,12 +73,12 @@ export default class Recibo extends React.Component {
   checkSeguro() {
     if (this.state.segselect === 'si') {
       this.setState({
-        comissegur: parseInt(this.state.arriendo) * 0.1,
+        comissegur: (parseInt(this.state.arriendo) * 0.1).toFixed(2),
       });
     }
     if (this.state.segselect === 'no') {
       this.setState({
-        comissegur: parseInt(this.state.arriendo) * 0.08,
+        comissegur: (parseInt(this.state.arriendo) * 0.08).toFixed(2),
       });
     }
   }
@@ -439,7 +439,7 @@ export default class Recibo extends React.Component {
   selectAmobHandler(event) {
     if (event.target.value === 'si') {
       this.setState({
-        comisamob: parseInt(this.state.arriendo) * 0.1,
+        comisamob: (parseInt(this.state.arriendo) * 0.1).toFixed(2),
         amobselect: 'si',
       });
     }
@@ -454,13 +454,13 @@ export default class Recibo extends React.Component {
   selectSeguroHandler(event) {
     if (event.target.value === 'si') {
       this.setState({
-        comissegur: parseInt(this.state.arriendo) * 0.1,
+        comissegur: (parseInt(this.state.arriendo) * 0.1).toFixed(2),
         segselect: 'si',
       });
     }
     else if (event.target.value === 'no') {
       this.setState({
-        comissegur: parseInt(this.state.arriendo) * 0.08,
+        comissegur: (parseInt(this.state.arriendo) * 0.08).toFixed(2),
         segselect: 'no',
       });
     }
