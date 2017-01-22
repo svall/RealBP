@@ -28,7 +28,7 @@ function getAllRecibos(req, res, next) {
   `)
   .then((recibos) => {
     res.recibos = recibos;
-    console.log('in model ', req.recibos);
+    // console.log('in model ', req.recibos);
     next();
   })
   .catch(error => next(error));

@@ -9,7 +9,7 @@ const { addRecibo, getAllRecibos } = require('../model/recibos');
 //   res.render(`<h1>'Hiiiii'</h1>`);
 // });
 
-router.get('/resumen', getAllRecibos, (req, res) => {
+router.get('/resumen/recibos', getAllRecibos, (req, res) => {
   res.json(res.recibos || []);
   // console.log('in router ', res.recibos);
 });
