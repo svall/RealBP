@@ -1,3 +1,15 @@
 .titleComp {
   text-align: center;
 }
+
+#linesContent {
+  /*background-color: lightblue;*/
+  /*overflow-y: scroll;*/
+}
+
+.containScroll {
+  /*background-color: lightgreen;*/
+  overflow-x: scroll;
+  /*width: 900px;*/
+  /*border: 1px dotted red;*/
+}
